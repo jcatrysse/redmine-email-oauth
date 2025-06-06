@@ -81,7 +81,7 @@ namespace :redmine do
       client = OAuth2::Client.new(client_config['client_id'], client_config['client_secret'],
         site: client_config['site'], authorize_url: client_config['authorize_url'], token_url: client_config['token_url'])
 
-      access_token = OAuth2::AccessToken.from_hash(client, YAML.load_file("#{token_file}.yml"))
+      access_token = OAuth2::AccessToken.from_hash(client, YAML.unsafe_load_file("#{token_file}.yml"))
 
       if access_token.expired?
         access_token = access_token.refresh!
